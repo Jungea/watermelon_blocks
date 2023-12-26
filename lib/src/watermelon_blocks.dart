@@ -1,13 +1,15 @@
 import 'dart:async';
+import 'dart:math' as math;
 
-import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 
-import 'components/play_area.dart';
+import 'components/components.dart';
 import 'config.dart';
 
 class WatermelonBlocks extends FlameGame {
+  final rand = math.Random();
+
   WatermelonBlocks()
       : super(
           camera: CameraComponent.withFixedResolution(
@@ -25,5 +27,13 @@ class WatermelonBlocks extends FlameGame {
     camera.viewfinder.anchor = Anchor.topLeft;
 
     world.add(PlayArea());
+
+    world.add(Ball(
+      position: Vector2(size.x / 2, 100),
+      size: Vector2.all(ballRadius),
+      sprite: await Sprite.load('1.png'),
+    ));
+
+    debugMode = true;
   }
 }
